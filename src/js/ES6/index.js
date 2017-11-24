@@ -30,7 +30,11 @@ var index = {
 				var point = new BMap.Point(r.point);
 				mainMap.centerAndZoom(r.point, 17);
 			} else {
-				alert('failed' + this.getStatus());
+				var myCity = new BMap.LocalCity();
+				myCity.get((result)=>{
+					var cityName = result.name;
+					mainMap.setCenter(cityName);
+				});
 			}
 		}, {
 			enableHighAccuracy: true
