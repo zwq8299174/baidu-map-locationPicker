@@ -20,10 +20,9 @@ define(['domReady','iNoBounce', 'zepto', 'touch'], (domReady,iNoBounce) => {
 		init: () => { //页面初始化
 			let $height = $searchWrap.height() + $('.map-wrap').height();
 			$addressList.css('top', $height);
-			iNoBounce.enable();
+//			iNoBounce.enable();
 		},
 		mapInit: () => { //地图初始化
-			console.log(BMap);
 			var geolocation = new BMap.Geolocation();
 			geolocation.getCurrentPosition(function(r) {
 				if(this.getStatus() == BMAP_STATUS_SUCCESS) {
@@ -44,7 +43,6 @@ define(['domReady','iNoBounce', 'zepto', 'touch'], (domReady,iNoBounce) => {
 			});
 			mainMap.addEventListener('moveend', (type, target, pixel, point) => {
 				//			console.log(mainMap.getCenter());
-				//				console.log(type.target.zC);
 				//			marker.setPosition(mainMap.getCenter());
 				if(moveend) {
 					geoc.getLocation(mainMap.getCenter(), (rs) => {
@@ -89,7 +87,9 @@ define(['domReady','iNoBounce', 'zepto', 'touch'], (domReady,iNoBounce) => {
 			$addressList.append($loading);
 			let localFn = () => {
 				console.log(local.getResults());
-				index.drawAddressList(local.getResults().vr, pois);
+				if(local.getResults()){
+					index.drawAddressList(local.getResults().wr, pois);
+				}
 			};
 			let local = new BMap.LocalSearch(mainMap, { //智能搜索
 				pageCapacity: 20,
@@ -155,7 +155,8 @@ define(['domReady','iNoBounce', 'zepto', 'touch'], (domReady,iNoBounce) => {
 			);
 		},
 		onSearchComplete: (e) => { //自动提示完成
-			index.drawResultList(e.vr);
+//			console.log(e);
+			index.drawResultList(e.wr);
 		},
 		searchResultClick: () => { //自动提示结果点击事件
 			$searchList.on('tap', 'li', function() {
@@ -235,7 +236,6 @@ define(['domReady','iNoBounce', 'zepto', 'touch'], (domReady,iNoBounce) => {
 					$searchList.find('ul').empty();
 				}
 			});
-
 		}
 	};
 
