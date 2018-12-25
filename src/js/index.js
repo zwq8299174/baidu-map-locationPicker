@@ -82,10 +82,10 @@ define(['domReady', 'iNoBounce', 'zepto', 'touch'], function(domReady, iNoBounce
 		localList: function localList(val, pois) {
 			//搜索中心点地址
 			$addressList.append($loading);
-			var localFn = function localFn() {
-				console.log(local.getResults());
+			var localFn = function localFn(e) {
+				console.log(e);
 				if(local.getResults()) {
-					index.drawAddressList(local.getResults().Dq, pois);
+					index.drawAddressList(local.getResults().Gq, pois);
 				}
 			};
 			var local = new BMap.LocalSearch(mainMap, { //智能搜索
@@ -175,7 +175,7 @@ define(['domReady', 'iNoBounce', 'zepto', 'touch'], function(domReady, iNoBounce
 		onSearchComplete: function onSearchComplete(e) {
 			//自动提示完成
 			console.log(e);
-			index.drawResultList(e.Dq);
+			index.drawResultList(e.Gq);
 		},
 		searchResultClick: function searchResultClick() {
 			//自动提示结果点击事件
@@ -290,3 +290,4 @@ define(['domReady', 'iNoBounce', 'zepto', 'touch'], function(domReady, iNoBounce
 		index.clearHistoryList();
 	});
 });
+
