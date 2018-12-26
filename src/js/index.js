@@ -144,7 +144,6 @@ define(['domReady', 'iNoBounce', 'zepto', 'touch'], function(domReady, iNoBounce
 
 				;
 			};
-			console.log(addressArr);
 			tpl.push($('<li class="no-more">没有更多了...</li>'));
 			$list.empty().append(tpl);
 			setTimeout(function() {
